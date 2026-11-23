@@ -14,10 +14,11 @@ const VoiceMark = ({
     {...props}
   >
     <path
-      d="M5 13v6m6-12v18m5-22v26m5-20v14m6-10v6"
+      d="M4 21c3 0 3-10 6-10s3 9 6 9 3-9 6-9 3 10 6 10"
       stroke="currentColor"
       strokeWidth="3"
       strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );

@@ -44,8 +44,6 @@ const VoiceWordmark = ({
         }}
       >
         {t("brand.name")}
-        <br />
-        <span style={{ fontWeight: 450 }}>{t("brand.capability")}</span>
       </span>
     </div>
   );

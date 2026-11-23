@@ -29,7 +29,7 @@ jobs:
           set -euo pipefail
           (cd artifact && shasum -a 256 -c SHA256SUMS-aarch64-apple-darwin.txt)
           ditto -x -k artifact/*.app.zip extracted
-          codesign --verify --deep --strict "extracted/Karen Voice.app"
+          codesign --verify --deep --strict "extracted/Mumble.app"
       - name: Download a pinned public speech model
         run: |
           set -euo pipefail
@@ -44,8 +44,8 @@ jobs:
         run: |
           set -euo pipefail
           say -v Samantha -r 160 -o sample.wav --file-format=WAVE --data-format=LEI16@16000 --channels=1 \
-            'Karen Voice turns speech into text. This is a local transcription test.'
-          python3 scripts/verify-built-transcription.py "extracted/Karen Voice.app/Contents/MacOS/karen-voice" sample.wav
+            'Mumble turns speech into text. This is a local transcription test.'
+          python3 scripts/verify-built-transcription.py "extracted/Mumble.app/Contents/MacOS/karen-voice" sample.wav
       - uses: actions/upload-artifact@v4
         with:
           name: transcription-verification

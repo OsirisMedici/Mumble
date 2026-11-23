@@ -96,6 +96,8 @@ mod macos {
             return;
         };
         remove_launch_agent_file(&plugin_launch_agent_path(&home, &app.package_info().name));
+        // Clean up the previous display name after the Mumble rename.
+        remove_launch_agent_file(&plugin_launch_agent_path(&home, "Karen Voice"));
     }
 
     /// Path of the plist the auto-launch crate writes:

@@ -3,9 +3,25 @@ import Foundation
 import FoundationModels
 
 @available(macOS 26.0, *)
-@Generable
-private struct CleanedTranscript: Sendable {
+// Explicit conformance keeps the same structured response schema on standalone
+// Command Line Tools, which include FoundationModels but not its macro plugin.
+private struct CleanedTranscript: Generable, Sendable {
     let cleanedText: String
+
+    static var generationSchema: GenerationSchema {
+        GenerationSchema(
+            type: Self.self,
+            properties: [.init(name: "cleanedText", type: String.self)]
+        )
+    }
+
+    init(_ content: GeneratedContent) throws {
+        cleanedText = try content.value(String.self, forProperty: "cleanedText")
+    }
+
+    var generatedContent: GeneratedContent {
+        GeneratedContent(properties: ["cleanedText": cleanedText])
+    }
 }
 
 // MARK: - Swift implementation for Apple LLM integration

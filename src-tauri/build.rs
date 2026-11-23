@@ -8,7 +8,7 @@ fn main() {
     // backend modules (the `dynamic-backends` posture in Cargo.toml). Bake an
     // $ORIGIN-relative rpath into the `handy` binary so it finds libtranscribe
     // next to it in the package — deb/rpm install into the app-private
-    // `/usr/lib/Karen Voice` (the dir tauri already uses for resources; keeps
+    // `/usr/lib/Mumble` (the dir tauri already uses for resources; keeps
     // Handy's libs out of the ldconfig-scanned `/usr/lib`, issue #1639) while
     // the AppImage keeps them in `usr/lib` (linuxdeploy's layout), hence both
     // entries. transcribe's
@@ -16,7 +16,7 @@ fn main() {
     // (Windows resolves DLLs from the exe directory, so it needs no rpath;
     // macOS links transcribe-cpp statically via the `metal` feature.)
     if std::env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("linux") {
-        println!("cargo:rustc-link-arg=-Wl,-rpath,$ORIGIN/../lib/Karen Voice:$ORIGIN/../lib");
+        println!("cargo:rustc-link-arg=-Wl,-rpath,$ORIGIN/../lib/Mumble:$ORIGIN/../lib");
     }
 
     // Stage transcribe-cpp's shared runtime libraries (and the dlopen'd ggml
@@ -160,7 +160,7 @@ fn stage_onnxruntime_dll() {
 /// ggml modules) may be the same dir — the `BTreeSet` below dedups them.
 ///
 /// Where the staged dir lands: Windows bundles it beside `handy.exe` (DLLs resolve
-/// from the exe dir); Linux deb/rpm map it into the app-private `/usr/lib/Karen Voice`
+/// from the exe dir); Linux deb/rpm map it into the app-private `/usr/lib/Mumble`
 /// and the AppImage into `usr/lib`, both on the binary's rpath.
 fn stage_transcribe_runtime_libs() {
     use std::collections::BTreeSet;
@@ -417,40 +417,17 @@ fn build_apple_intelligence_bridge() {
     // Check if the SDK supports FoundationModels (required for Apple Intelligence)
     let framework_path =
         Path::new(&sdk_path).join("System/Library/Frameworks/FoundationModels.framework");
-    // HANDY_FORCE_AI_STUB=1 is an explicit escape hatch: force the stub even when
-    // the active toolchain could build the real path (e.g. to skip the Swift
-    // compile, or if the auto-detection below misfires). The common CLT-only case
-    // is detected automatically just below, so this flag is rarely needed.
+    // HANDY_FORCE_AI_STUB=1 remains an explicit opt-out. The Swift bridge uses
+    // explicit Generable conformance, so it also compiles with standalone
+    // Command Line Tools that ship the framework without its macro plugin.
     let force_stub = env::var("HANDY_FORCE_AI_STUB").as_deref() == Ok("1");
-
-    // Auto-detect a Command-Line-Tools-only toolchain. The CLT SDK contains
-    // FoundationModels.framework, so the `framework_path.exists()` check alone
-    // wrongly selects the real Swift path, which then fails to compile because
-    // the CLT `swiftc` has no FoundationModelsMacros plugin (full Xcode only).
-    // Detecting this lets a plain `cargo build` / `tauri dev` succeed without the
-    // manual flag. Skipped when SWIFTC is overridden: that signals a custom
-    // toolchain (e.g. the nixpkgs standalone-swift path supported above) whose
-    // capabilities can't be inferred from `xcode-select`.
-    let command_line_tools_only = env::var("SWIFTC").is_err() && is_command_line_tools_only();
-    if command_line_tools_only && !force_stub {
-        println!(
-            "cargo:warning=Command Line Tools-only toolchain detected; Apple Intelligence \
-             (FoundationModels) needs full Xcode. Falling back to stubs. Install Xcode and run \
-             `sudo xcode-select -s /Applications/Xcode.app`, or set HANDY_FORCE_AI_STUB=1 to \
-             silence this message."
-        );
-    }
-
-    let has_foundation_models = framework_path.exists() && !force_stub && !command_line_tools_only;
+    let has_foundation_models = framework_path.exists() && !force_stub;
 
     let source_file = if has_foundation_models {
         println!("cargo:warning=Building with Apple Intelligence support.");
         REAL_SWIFT_FILE
     } else {
-        // The SDK genuinely lacking FoundationModels is only one reason we build
-        // stubs — CLT-only detection and HANDY_FORCE_AI_STUB (each warned about
-        // above) also land here, and for those the framework does exist. Only
-        // claim it's "not found" when that's actually true.
+        // Distinguish an explicit opt-out from an older SDK.
         if framework_path.exists() {
             println!("cargo:warning=Building Apple Intelligence with stubs.");
         } else {
@@ -553,28 +530,4 @@ fn build_apple_intelligence_bridge() {
     }
 
     println!("cargo:rustc-link-arg=-Wl,-rpath,/usr/lib/swift");
-}
-
-/// Returns true when the active developer directory is the standalone Command
-/// Line Tools rather than a full Xcode install.
-///
-/// `xcode-select -p` prints the active developer dir; the CLT install resolves
-/// to a path ending in `CommandLineTools` (e.g. `/Library/Developer/CommandLineTools`),
-/// whereas full Xcode resolves under `Xcode.app`. A CLT-only toolchain ships
-/// FoundationModels.framework in its SDK but a `swiftc` without the
-/// FoundationModelsMacros plugin, so the Apple Intelligence Swift path cannot
-/// compile (issue #1448). On any error we conservatively return false so the
-/// existing SDK-presence check decides.
-#[cfg(all(target_os = "macos", target_arch = "aarch64"))]
-fn is_command_line_tools_only() -> bool {
-    use std::process::Command;
-
-    Command::new("xcode-select")
-        .arg("-p")
-        .output()
-        .ok()
-        .filter(|out| out.status.success())
-        .and_then(|out| String::from_utf8(out.stdout).ok())
-        .map(|path| path.trim().ends_with("CommandLineTools"))
-        .unwrap_or(false)
 }

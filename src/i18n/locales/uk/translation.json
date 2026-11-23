@@ -101,7 +101,7 @@
     },
     "permissions": {
       "title": "Потрібні дозволи",
-      "description": "Karen Voice потребує деяких дозволів для коректної роботи.",
+      "description": "Mumble потребує деяких дозволів для коректної роботи.",
       "microphone": {
         "title": "Доступ до мікрофона",
         "description": "Потрібен для прослуховування вашого голосу для транскрипції."
@@ -226,7 +226,7 @@
       "searchPlaceholder": "Пошук моделей за назвою…",
       "rescan": {
         "label": "Пересканувати",
-        "tooltip": "Пересканувати моделі, додані до папки моделей або кешу Hugging Face поза межами Karen Voice"
+        "tooltip": "Пересканувати моделі, додані до папки моделей або кешу Hugging Face поза межами Mumble"
       }
     },
     "sound": {
@@ -293,11 +293,11 @@
       },
       "autostart": {
         "label": "Запуск при старті системи",
-        "description": "Автоматично запускати Karen Voice при вході в систему"
+        "description": "Автоматично запускати Mumble при вході в систему"
       },
       "showTrayIcon": {
         "label": "Показати значок у треї",
-        "description": "Відображати значок Karen Voice у системному треї."
+        "description": "Відображати значок Mumble у системному треї."
       },
       "overlay": {
         "style": {
@@ -502,7 +502,7 @@
       },
       "updateChecks": {
         "label": "Перевірка оновлень",
-        "description": "Автоматично перевіряти наявність нових версій Karen Voice",
+        "description": "Автоматично перевіряти наявність нових версій Mumble",
         "lockedDescription": "Вимкнено системною конфігурацією (HANDY_DISABLE_UPDATER)"
       },
       "soundTheme": {
@@ -580,7 +580,7 @@
       },
       "keyboardDiagnostic": {
         "title": "Діагностика клавіатури",
-        "description": "Перевіряє, чи доходять події клавіатури до Karen Voice. Записується лише кількість подій — ніколи те, які клавіші ви натискаєте.",
+        "description": "Перевіряє, чи доходять події клавіатури до Mumble. Записується лише кількість подій — ніколи те, які клавіші ви натискаєте.",
         "run": "Запустити 10-секундну діагностику",
         "running": "Прослуховування… натисніть свою комбінацію кілька разів (наприклад, Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -594,7 +594,7 @@
         "mouse": "Миша",
         "verdictBlocked": "Secure Input блокує події клавіш — комбінації зі звичайною клавішею не працюватимуть, доки це не буде усунуто.",
         "verdictSuspicious": "Події модифікаторів надходять, а події клавіш — ні: щось пригнічує клавіші, хоча Secure Input позначено як вимкнений. Будь ласка, повідомте про це на GitHub.",
-        "verdictOk": "Події клавіш надходять до Karen Voice нормально.",
+        "verdictOk": "Події клавіш надходять до Mumble нормально.",
         "verdictNoEvents": "Подій не зафіксовано — ви натискали клавіші під час тесту?",
         "failed": "Не вдалося виконати діагностику: {{error}}"
       },
@@ -617,11 +617,11 @@
       "title": "Інфо",
       "version": {
         "title": "Версія",
-        "description": "Поточна версія Karen Voice"
+        "description": "Поточна версія Mumble"
       },
       "appDataDirectory": {
         "title": "Папка даних програми",
-        "description": "Розташування даних Karen Voice"
+        "description": "Розташування даних Mumble"
       },
       "sourceCode": {
         "title": "Вихідний код",
@@ -630,7 +630,7 @@
       },
       "supportDevelopment": {
         "title": "Підтримати розробку",
-        "description": "Допоможіть нам продовжувати розвивати Karen Voice",
+        "description": "Допоможіть нам продовжувати розвивати Mumble",
         "button": "Підтримати"
       },
       "acknowledgments": {
@@ -638,12 +638,12 @@
         "ggml": {
           "title": "ggml",
           "description": "Високопродуктивний інференс моделі автоматичного розпізнавання мовлення Whisper від OpenAI",
-          "details": "Karen Voice використовує ggml для швидкої локальної обробки мовлення в текст. Дякуємо за чудову роботу Георгію Герганову та контриб'юторам."
+          "details": "Mumble використовує ggml для швидкої локальної обробки мовлення в текст. Дякуємо за чудову роботу Георгію Герганову та контриб'юторам."
         }
       },
       "whatsNewUpdates": {
         "label": "Показувати новини",
-        "description": "Показувати примітки до випуску після оновлень Karen Voice"
+        "description": "Показувати примітки до випуску після оновлень Mumble"
       }
     }
   },
@@ -672,7 +672,7 @@
     "noOptionsFound": "Опцій не знайдено"
   },
   "accessibility": {
-    "permissionsDescription": "Karen Voice потребує дозволи доступності для введення транскрибованого тексту.",
+    "permissionsDescription": "Mumble потребує дозволи доступності для введення транскрибованого тексту.",
     "openSettings": "Відкрити Системні налаштування"
   },
   "errors": {
@@ -695,11 +695,11 @@
   },
   "appLanguage": {
     "title": "Мова інтерфейсу",
-    "description": "Змінити мову інтерфейсу Karen Voice"
+    "description": "Змінити мову інтерфейсу Mumble"
   },
   "theme": {
     "title": "Тема застосунку",
-    "description": "Виберіть, чи має Karen Voice слідувати темі системи, чи залишатися світлою або темною",
+    "description": "Виберіть, чи має Mumble слідувати темі системи, чи залишатися світлою або темною",
     "options": {
       "system": "Системна",
       "light": "Світла",
@@ -711,7 +711,7 @@
     "processing": "Постобробка..."
   },
   "whatsNew": {
-    "title": "Нове в Karen Voice v{{version}}"
+    "title": "Нове в Mumble v{{version}}"
   },
   "secureInput": {
     "blockedWithCulprit_one": "{{name}} може блокувати 1 комбінацію клавіш",
@@ -723,5 +723,10 @@
     "learnMore": "Як це виправити",
     "recorderBlocked": "Зараз неможливо записати комбінацію — Secure Input у macOS блокує події клавіш. Спершу усуньте попередження про Secure Input.",
     "dismiss": "Приховати"
+  },
+  "brand": {
+    "fullName": "Mumble",
+    "name": "Mumble",
+    "capability": "Voice"
   }
 }

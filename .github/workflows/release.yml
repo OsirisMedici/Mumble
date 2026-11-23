@@ -69,7 +69,7 @@ jobs:
           TARGET: ${{ matrix.target }}
         run: |
           set -euo pipefail
-          APP="src-tauri/target/$TARGET/release/bundle/macos/Karen Voice.app"
+          APP="src-tauri/target/$TARGET/release/bundle/macos/Mumble.app"
           test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$APP/Contents/Info.plist")" = "com.osirismedici.karenvoice"
           test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP/Contents/Info.plist")" = "0.1.0"
           codesign --verify --deep --strict "$APP"
@@ -78,8 +78,8 @@ jobs:
           "$APP/Contents/MacOS/karen-voice" --list-devices
           otool -L "$APP/Contents/MacOS/karen-voice"
           mkdir -p release-assets
-          ditto -c -k --sequesterRsrc --keepParent "$APP" "release-assets/Karen-Voice_0.1.0_${TARGET}.app.zip"
-          cp src-tauri/target/$TARGET/release/bundle/dmg/*.dmg "release-assets/Karen-Voice_0.1.0_${TARGET}.dmg"
+          ditto -c -k --sequesterRsrc --keepParent "$APP" "release-assets/Mumble_0.1.0_${TARGET}.app.zip"
+          cp src-tauri/target/$TARGET/release/bundle/dmg/*.dmg "release-assets/Mumble_0.1.0_${TARGET}.dmg"
           cp LICENSE THIRD_PARTY_NOTICES.md release-assets/
           (cd release-assets && shasum -a 256 *.dmg *.zip > "SHA256SUMS-${TARGET}.txt")
       - uses: actions/upload-artifact@v4
@@ -103,4 +103,4 @@ jobs:
       - name: Publish preview downloads
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" release-assets/* --verify-tag --prerelease --title "Karen Voice 0.1.0 Preview" --notes-file docs/RELEASE_NOTES.md
+        run: gh release create "$GITHUB_REF_NAME" release-assets/* --verify-tag --prerelease --title "Mumble 0.1.0 Preview" --notes-file docs/RELEASE_NOTES.md

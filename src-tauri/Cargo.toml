@@ -1,7 +1,7 @@
 [package]
 name = "karen-voice"
 version = "0.1.0"
-description = "Karen Voice - local speech to text"
+description = "Mumble - local speech to text"
 authors = ["Osiris Medici", "CJ Pais and contributors"]
 edition = "2021"
 license = "MIT"
@@ -90,6 +90,7 @@ tauri-plugin-dialog = "2.6"
 hf-hub = { git = "https://github.com/cjpais/hf-hub", branch = "cancellable-downloads", features = [
   "tokio",
 ] }
+text2num = { version = "2.8.0", default-features = false, features = ["en", "std"] }
 
 [target.'cfg(unix)'.dependencies]
 signal-hook = "0.3"

@@ -3,6 +3,7 @@ use crate::audio_toolkit::{
     remove_filler_words, OutputLanguageEvidence,
 };
 use crate::chinese_script::{convert_chinese_script, ChineseVariety};
+use crate::formatting::format_transcript;
 use crate::managers::audio::AudioRecordingManager;
 use crate::managers::model::{EngineType, ModelManager};
 use crate::settings::{
@@ -1826,7 +1827,11 @@ fn post_process_transcription_text(
             settings.filler_word_removal_enabled,
         );
 
-        normalize_transcription_output(&without_fillers)
+        format_transcript(
+            &normalize_transcription_output(&without_fillers),
+            settings.number_formatting_enabled,
+            settings.email_formatting_enabled,
+        )
     })
 }
 

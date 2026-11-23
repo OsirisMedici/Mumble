@@ -445,9 +445,9 @@ pub fn tray_tooltip() -> String {
 
 fn version_label() -> String {
     if cfg!(debug_assertions) {
-        format!("Karen Voice v{} (Dev)", env!("CARGO_PKG_VERSION"))
+        format!("Mumble v{} (Dev)", env!("CARGO_PKG_VERSION"))
     } else {
-        format!("Karen Voice v{}", env!("CARGO_PKG_VERSION"))
+        format!("Mumble v{}", env!("CARGO_PKG_VERSION"))
     }
 }
 
