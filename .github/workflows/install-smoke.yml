@@ -22,13 +22,17 @@ jobs:
           bash scripts/install/macos.sh --destination "$RUNNER_TEMP/Installed Mumble"
           APP="$RUNNER_TEMP/Installed Mumble/Mumble.app"
           codesign --verify --deep --strict "$APP"
+          BEFORE_INODE=$(stat -f %i "$APP")
+          bash scripts/install/macos.sh --destination "$RUNNER_TEMP/Installed Mumble"
+          test "$(stat -f %i "$APP")" = "$BEFORE_INODE"
           "$APP/Contents/MacOS/karen-voice" --list-devices
       - name: Install and verify Windows release
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          ./scripts/install/windows.ps1 -Destination "$env:RUNNER_TEMP/Installed Mumble"
-          $exe = "$env:RUNNER_TEMP/Installed Mumble/karen-voice.exe"
+          $destination = Join-Path $env:RUNNER_TEMP 'Installed Mumble'
+          ./scripts/install/windows.ps1 -Destination $destination
+          $exe = Join-Path $destination 'karen-voice.exe'
           if ((Get-Item $exe).VersionInfo.ProductName -ne 'Mumble') { throw 'Wrong product' }
-          & $exe --list-devices
-          if ($LASTEXITCODE -ne 0) { throw 'Installed engine failed startup' }
+          $app = Start-Process $exe -ArgumentList '--list-devices' -Wait -PassThru
+          if ($app.ExitCode -ne 0) { throw 'Installed engine failed startup' }
