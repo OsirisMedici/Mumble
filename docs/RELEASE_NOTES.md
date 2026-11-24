@@ -7,7 +7,7 @@ The first public preview of Mumble: free local dictation with a configurable sho
 - Open the DMG and drag Mumble into Applications. Grant microphone and Accessibility permissions, then download a model.
 - ZIP archives contain the same app for people who prefer an archive. SHA256SUMS files verify download integrity.
 
-Windows x64 preview downloads include an NSIS `windows_x64-setup.exe` installer and a portable ZIP for Intel/AMD PCs. The installer includes native speech and VC++ runtime DLLs and installs WebView2 if needed. Windows microphone privacy controls must allow desktop apps. Windows builds are unsigned; Windows ARM64 is not included. See [Windows setup](docs/WINDOWS.md).
+Windows x64 preview downloads include an NSIS `windows_x64-setup.exe` installer and a portable ZIP for Intel/AMD PCs. The installer includes native speech and VC++ runtime DLLs and installs WebView2 if needed. Windows microphone privacy controls must allow desktop apps. Windows builds are unsigned; Windows ARM64 is not included. See [Windows setup](https://github.com/OsirisMedici/karen-voice/blob/main/docs/WINDOWS.md).
 
 Requires macOS 13 or newer. These preview builds are **ad-hoc signed and not Apple notarized**. macOS may block the first launch. Use System Settings → Privacy & Security → Open Anyway for this app, following [Apple's instructions](https://support.apple.com/en-us/102445).
 

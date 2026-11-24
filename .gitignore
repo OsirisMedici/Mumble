@@ -50,3 +50,10 @@ __pycache__/
 .env
 .env.*
 !.env.example
+
+# Generated Windows build dependencies and preview artifacts
+/VULKAN_SDK/
+/src-tauri/resources/licenses/onnxruntime/
+/release-assets/
+/windows-evidence/
+/transcription-result.json
