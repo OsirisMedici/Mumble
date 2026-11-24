@@ -4,7 +4,7 @@ about: Report a problem in Mumble
 labels: bug
 ---
 
-Please check [existing issues](https://github.com/OsirisMedici/karen-voice/issues) first.
+Please check [existing issues](https://github.com/OsirisMedici/Mumble/issues) first.
 
 ## What happened
 

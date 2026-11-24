@@ -31,7 +31,7 @@ bun run tauri build --target aarch64-apple-darwin --bundles app,dmg -- --locked
 
 The GitHub Actions workflow builds Apple Silicon and Intel apps, verifies their bundle identities and code signatures, checks native compute-device startup, and uploads archives with checksums. The release job publishes downloads only after all jobs pass. Published previews are ad-hoc signed and not notarized. Apple notarization requires a maintainer's Developer ID setup.
 
-The displayed app name is `Mumble`. For compatibility with existing installations, the app identity remains `com.osirismedici.karenvoice`, the executable is `karen-voice`, and the data directory is managed by Tauri under that identity. The legacy identifier, executable name, theme storage key and portable marker remain stable so existing settings, models and recordings stay accessible. Repository links continue to point to `OsirisMedici/karen-voice`. The app and interface use the rounded Mumble “m” mark.
+The displayed app name is `Mumble`. For compatibility with existing installations, the app identity remains `com.osirismedici.karenvoice`, the executable is `karen-voice`, and the data directory is managed by Tauri under that identity. The legacy identifier, executable name, theme storage key and portable marker remain stable so existing settings, models and recordings stay accessible. Repository links continue to point to `OsirisMedici/Mumble`. The app and interface use the rounded Mumble “m” mark.
 
 ## Windows x64
 

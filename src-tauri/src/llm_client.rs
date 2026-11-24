@@ -143,11 +143,11 @@ fn build_headers(provider: &PostProcessProvider, api_key: &str) -> Result<Header
     headers.insert(CONTENT_TYPE, HeaderValue::from_static("application/json"));
     headers.insert(
         REFERER,
-        HeaderValue::from_static("https://github.com/OsirisMedici/karen-voice"),
+        HeaderValue::from_static("https://github.com/OsirisMedici/Mumble"),
     );
     headers.insert(
         USER_AGENT,
-        HeaderValue::from_static("Mumble/0.1.0 (+https://github.com/OsirisMedici/karen-voice)"),
+        HeaderValue::from_static("Mumble/0.1.0 (+https://github.com/OsirisMedici/Mumble)"),
     );
     headers.insert("X-Title", HeaderValue::from_static("Mumble"));
 

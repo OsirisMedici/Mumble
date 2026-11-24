@@ -8,7 +8,7 @@ const UpdateChecker = ({ className = "" }: { className?: string }) => {
       type="button"
       className={`hover:underline ${className}`}
       onClick={() =>
-        void openUrl("https://github.com/OsirisMedici/karen-voice/releases")
+        void openUrl("https://github.com/OsirisMedici/Mumble/releases")
       }
     >
       {t("settings.about.downloadReleases")}

@@ -2,7 +2,7 @@
 
 Free, open-source dictation that runs on your computer. Press a shortcut, speak, and paste your words into the app you are using.
 
-[Download the Mac preview](https://github.com/OsirisMedici/karen-voice/releases) · [Report a problem](https://github.com/OsirisMedici/karen-voice/issues)
+[Download the Mac preview](https://github.com/OsirisMedici/Mumble/releases) · [Report a problem](https://github.com/OsirisMedici/Mumble/issues)
 
 ## Download and start on Mac
 
