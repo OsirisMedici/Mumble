@@ -21,7 +21,9 @@ New-Item -ItemType Directory -Path $work | Out-Null
 try {
     $setup = Join-Path $work $asset
     Invoke-WebRequest "$base/$asset" -OutFile $setup -UseBasicParsing
-    $manifest = (Invoke-WebRequest "$base/SHA256SUMS-windows-x64.txt" -UseBasicParsing).Content
+    $manifestPath = Join-Path $work 'SHA256SUMS-windows-x64.txt'
+    Invoke-WebRequest "$base/SHA256SUMS-windows-x64.txt" -OutFile $manifestPath -UseBasicParsing
+    $manifest = Get-Content $manifestPath -Raw
     $pattern = '(?m)^([a-f0-9]{64})\s+' + [Regex]::Escape($asset) + '\r?$'
     $matchesFound = [Regex]::Matches($manifest, $pattern)
     if ($matchesFound.Count -ne 1) { throw 'Release checksum is missing or ambiguous.' }
