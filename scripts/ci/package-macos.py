@@ -4,11 +4,9 @@ import json
 import os
 from pathlib import Path
 import plistlib
-import re
 import subprocess
 import sys
 import tempfile
-import urllib.request
 
 
 def run(*args, **kwargs):
@@ -44,9 +42,7 @@ models.mkdir(parents=True, exist_ok=True)
 model = models / 'parakeet-tdt-0.6b-v3-Q8_0.gguf'
 url = 'https://blob.handy.computer/handy-computer/parakeet-tdt-0.6b-v3-gguf/85ac09ea12fc4b1112fa76810059364bc6adc9de/parakeet-tdt-0.6b-v3-Q8_0.gguf'
 if not model.exists():
-    with urllib.request.urlopen(url, timeout=900) as response, model.open('wb') as output:
-        while block := response.read(1024 * 1024):
-            output.write(block)
+    run('curl', '--fail', '--location', '--retry', '3', '--max-time', '900', url, '-o', str(model))
 assert hashlib.sha256(model.read_bytes()).hexdigest() == '5859f77944efcd8eafa23a6350731960b2b55b2203df51f319665c807d802cc7'
 settings = data / 'settings_store.json'
 store = json.loads(settings.read_text()) if settings.exists() else {}

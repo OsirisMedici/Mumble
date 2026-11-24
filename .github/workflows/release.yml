@@ -48,6 +48,7 @@ jobs:
         with:
           workspaces: src-tauri -> target
           key: ${{ matrix.target }}
+          cache-on-failure: true
       - run: bun install --frozen-lockfile
       - name: Install Intel ONNX Runtime
         if: matrix.target == 'x86_64-apple-darwin'
