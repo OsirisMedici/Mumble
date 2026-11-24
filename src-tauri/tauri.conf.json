@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Karen Voice",
+  "productName": "Mumble",
   "version": "0.1.0",
   "identifier": "com.osirismedici.karenvoice",
   "build": {
@@ -47,7 +47,7 @@
       "deb": {
         "depends": ["libgtk-layer-shell0", "libopenblas0"],
         "files": {
-          "/usr/lib/Karen Voice": "transcribe-libs"
+          "/usr/lib/Mumble": "transcribe-libs"
         }
       },
       "rpm": {
@@ -59,7 +59,7 @@
           "type": "none"
         },
         "files": {
-          "/usr/lib/Karen Voice": "transcribe-libs"
+          "/usr/lib/Mumble": "transcribe-libs"
         }
       },
       "appimage": {

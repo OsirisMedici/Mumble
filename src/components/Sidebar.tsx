@@ -1,6 +1,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Cog, FlaskConical, History, Info, Sparkles, Cpu } from "lucide-react";
+import {
+  Cog,
+  FlaskConical,
+  History,
+  Info,
+  Sparkles,
+  Cpu,
+  CaseSensitive,
+} from "lucide-react";
 import VoiceWordmark from "./icons/VoiceWordmark";
 import VoiceMark from "./icons/VoiceMark";
 import { useSettings } from "../hooks/useSettings";
@@ -12,6 +20,7 @@ import {
   AboutSettings,
   PostProcessingSettings,
   ModelsSettings,
+  FormattingSettings,
 } from "./settings";
 
 export type SidebarSection = keyof typeof SECTIONS_CONFIG;
@@ -54,6 +63,12 @@ export const SECTIONS_CONFIG = {
     labelKey: "sidebar.advanced",
     icon: Cog,
     component: AdvancedSettings,
+    enabled: () => true,
+  },
+  formatting: {
+    labelKey: "sidebar.formatting",
+    icon: CaseSensitive,
+    component: FormattingSettings,
     enabled: () => true,
   },
   postprocessing: {

@@ -499,6 +499,12 @@ pub struct AppSettings {
     pub external_script_path: Option<String>,
     #[serde(default = "default_filler_word_removal_enabled")]
     pub filler_word_removal_enabled: bool,
+    /// Optional local English number-word formatting. Missing legacy values stay off.
+    #[serde(default)]
+    pub number_formatting_enabled: bool,
+    /// Optional local spoken-email formatting. Existing stores stay off.
+    #[serde(default)]
+    pub email_formatting_enabled: bool,
     #[serde(default)]
     pub custom_filler_words: Option<Vec<String>>,
     /// Fresh installs default from the OS locale; existing stores are migrated
@@ -1003,6 +1009,8 @@ pub fn get_default_settings() -> AppSettings {
         typing_tool: default_typing_tool(),
         external_script_path: None,
         filler_word_removal_enabled: default_filler_word_removal_enabled(),
+        number_formatting_enabled: false,
+        email_formatting_enabled: false,
         custom_filler_words: None,
         chinese_script: default_chinese_script(),
         transcribe_accelerator: TranscribeAcceleratorSetting::default(),
@@ -1298,6 +1306,34 @@ pub fn get_recording_retention_period(app: &AppHandle) -> RecordingRetentionPeri
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn number_formatting_is_opt_in_and_survives_serialization() {
+        let mut raw = serde_json::to_value(get_default_settings()).unwrap();
+        raw.as_object_mut()
+            .unwrap()
+            .remove("number_formatting_enabled");
+        let mut settings: AppSettings = serde_json::from_value(raw).unwrap();
+        assert!(!settings.number_formatting_enabled);
+        settings.number_formatting_enabled = true;
+        let restored: AppSettings =
+            serde_json::from_value(serde_json::to_value(settings).unwrap()).unwrap();
+        assert!(restored.number_formatting_enabled);
+    }
+
+    #[test]
+    fn email_formatting_is_opt_in_and_survives_serialization() {
+        let mut raw = serde_json::to_value(get_default_settings()).unwrap();
+        raw.as_object_mut()
+            .unwrap()
+            .remove("email_formatting_enabled");
+        let mut settings: AppSettings = serde_json::from_value(raw).unwrap();
+        assert!(!settings.email_formatting_enabled);
+        settings.email_formatting_enabled = true;
+        let restored: AppSettings =
+            serde_json::from_value(serde_json::to_value(settings).unwrap()).unwrap();
+        assert!(restored.email_formatting_enabled);
+    }
 
     #[test]
     fn stored_binding_returns_the_requested_binding() {

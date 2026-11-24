@@ -7,7 +7,7 @@ import { commands, type SecureInputStatus } from "@/bindings";
 
 // Detailed remediation steps live in the docs rather than in the banner
 export const SECURE_INPUT_HELP_URL =
-  "https://github.com/OsirisMedici/karen-voice/blob/main/README.md#troubleshooting";
+  "https://github.com/OsirisMedici/Mumble/blob/main/README.md#troubleshooting";
 
 /**
  * Compact warning banner shown while macOS Secure Input is stuck on.

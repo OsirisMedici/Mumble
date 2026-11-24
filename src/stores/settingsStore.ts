@@ -191,6 +191,10 @@ const settingUpdaters: {
   },
   filler_word_removal_enabled: (value) =>
     commands.changeFillerWordRemovalEnabledSetting(value as boolean),
+  email_formatting_enabled: (value) =>
+    commands.changeEmailFormattingEnabledSetting(value as boolean),
+  number_formatting_enabled: (value) =>
+    commands.changeNumberFormattingEnabledSetting(value as boolean),
   chinese_script: (value) =>
     commands.changeChineseScriptSetting(value as ChineseScript),
   show_tray_icon: (value) =>

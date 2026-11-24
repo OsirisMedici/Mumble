@@ -389,15 +389,19 @@ pub(crate) async fn process_transcription_output(
     transcription: &str,
     post_process: bool,
 ) -> ProcessedTranscription {
+    let settings = get_settings(app);
     if !post_process {
         return ProcessedTranscription {
-            final_text: transcription.to_string(),
+            final_text: crate::formatting::format_transcript(
+                transcription,
+                settings.number_formatting_enabled,
+                settings.email_formatting_enabled,
+            ),
             post_processed_text: None,
             post_process_prompt: None,
         };
     }
 
-    let settings = get_settings(app);
     let cleanup = async {
         if settings.post_process_enabled {
             post_process_transcription(&settings, transcription).await
@@ -412,6 +416,24 @@ pub(crate) async fn process_transcription_output(
             .iter()
             .find(|prompt| Some(&prompt.id) == settings.post_process_selected_prompt_id.as_ref())
             .map(|prompt| prompt.prompt.clone());
+    }
+    // Cleanup providers can spell digits out again. Apply the user's local
+    // formatting preference last, including when cleanup falls back or times out.
+    apply_output_formatting(
+        result,
+        settings.number_formatting_enabled,
+        settings.email_formatting_enabled,
+    )
+}
+
+fn apply_output_formatting(
+    mut result: ProcessedTranscription,
+    numbers: bool,
+    emails: bool,
+) -> ProcessedTranscription {
+    result.final_text = crate::formatting::format_transcript(&result.final_text, numbers, emails);
+    if let Some(text) = result.post_processed_text.as_mut() {
+        *text = crate::formatting::format_transcript(text, numbers, emails);
     }
     result
 }
@@ -916,7 +938,7 @@ pub static ACTION_MAP: Lazy<HashMap<String, Arc<dyn ShortcutAction>>> = Lazy::ne
 #[cfg(test)]
 mod tests {
     use super::{
-        complete_unless_cancelled, finish_cleanup, is_blank_transcription,
+        apply_output_formatting, complete_unless_cancelled, finish_cleanup, is_blank_transcription,
         should_use_streaming_overlay, strip_think_block,
     };
     use crate::settings::OverlayStyle;
@@ -959,6 +981,51 @@ mod tests {
                 finish_cleanup(original, future::ready(Some(cleaned.to_string())), timeout).await;
             assert_eq!(result.final_text, cleaned);
             assert_eq!(result.post_processed_text.as_deref(), Some(cleaned));
+        });
+    }
+
+    #[test]
+    fn number_formatting_follows_cleanup_success_and_fallback() {
+        tauri::async_runtime::block_on(async {
+            for response in [
+                None,
+                Some(" \n".to_string()),
+                Some("Buy twenty five chairs.".to_string()),
+            ] {
+                let result = finish_cleanup(
+                    "Buy twenty five chairs.",
+                    future::ready(response),
+                    Duration::from_millis(20),
+                )
+                .await;
+                let result = apply_output_formatting(result, true, false);
+                assert_eq!(result.final_text, "Buy 25 chairs.");
+                if let Some(cleaned) = result.post_processed_text {
+                    assert_eq!(cleaned, result.final_text);
+                }
+            }
+        });
+    }
+
+    #[test]
+    fn email_formatting_follows_cleanup_success_and_fallback() {
+        tauri::async_runtime::block_on(async {
+            for response in [
+                None,
+                Some("My email is john at the rate gmail dot com.".to_string()),
+            ] {
+                let result = finish_cleanup(
+                    "My email is john at the rate gmail dot com.",
+                    future::ready(response),
+                    Duration::from_millis(20),
+                )
+                .await;
+                let result = apply_output_formatting(result, true, true);
+                assert_eq!(result.final_text, "My email is john@gmail.com.");
+                if let Some(cleaned) = result.post_processed_text {
+                    assert_eq!(cleaned, result.final_text);
+                }
+            }
         });
     }
 

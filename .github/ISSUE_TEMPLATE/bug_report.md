@@ -1,10 +1,10 @@
 ---
 name: Bug report
-about: Report a problem in Karen Voice
+about: Report a problem in Mumble
 labels: bug
 ---
 
-Please check [existing issues](https://github.com/OsirisMedici/karen-voice/issues) first.
+Please check [existing issues](https://github.com/OsirisMedici/Mumble/issues) first.
 
 ## What happened
 
@@ -18,7 +18,7 @@ Describe the problem and what you expected.
 
 ## Environment
 
-- Karen Voice version:
+- Mumble version:
 - macOS version:
 - Apple Silicon or Intel:
 - Speech model:

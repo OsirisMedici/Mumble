@@ -1,0 +1,53 @@
+name: Publish verified preview
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_revision:
+        description: Exact 40-character app source commit built by both runs
+        required: true
+        type: string
+      mac_run:
+        description: Successful Desktop preview release run ID
+        required: true
+        type: string
+      windows_run:
+        description: Successful Windows preview run ID
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SOURCE_REVISION: ${{ inputs.source_revision }}
+      MAC_RUN: ${{ inputs.mac_run }}
+      WINDOWS_RUN: ${{ inputs.windows_run }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.mac_run }}
+          pattern: mac-*
+          path: release-assets
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.windows_run }}
+          name: windows-x86_64-pc-windows-msvc
+          path: release-assets
+      - name: Verify source provenance, reports and every checksum
+        run: python3 scripts/release/validate-assets.py
+      - name: Publish verified downloads
+        run: |
+          gh release create v0.1.0-preview.2 release-assets/* \
+            --target "$SOURCE_REVISION" --prerelease \
+            --title "Mumble 0.1.0 Preview 2 · Mac and Windows" \
+            --notes-file docs/RELEASE_NOTES.md

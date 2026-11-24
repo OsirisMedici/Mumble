@@ -12,7 +12,8 @@
   "sidebar": {
     "general": "General",
     "models": "Models",
-    "advanced": "Advanced",
+    "advanced": "Controls",
+    "formatting": "Formatting",
     "postProcessing": "Post Process",
     "cleanDictation": "Clean Dictation",
     "history": "History",
@@ -102,7 +103,7 @@
     },
     "permissions": {
       "title": "Permissions Required",
-      "description": "Karen Voice needs a couple of permissions to work properly.",
+      "description": "Mumble needs a couple of permissions to work properly.",
       "microphone": {
         "title": "Microphone Access",
         "description": "Required to hear your voice for transcription."
@@ -156,13 +157,34 @@
     }
   },
   "settings": {
+    "formatting": {
+      "title": "Formatting",
+      "numbers": {
+        "title": "Numbers as digits",
+        "description": "Convert English number words to digits, such as “twenty five” to “25”."
+      },
+      "preview": {
+        "title": "Try it",
+        "description": "Preview the current setting without recording.",
+        "input": "Example speech",
+        "output": "Formatted text",
+        "example": "My email is pranshi at the rate gmail dot com.",
+        "loading": "Updating preview…",
+        "error": "Could not load the formatting preview.",
+        "hint": "Try “john dot smith attherate outlook dot com” or “twenty five”. Both settings run locally; this example is not saved."
+      },
+      "emails": {
+        "title": "Spoken email addresses",
+        "description": "Convert “pranshi at the rate gmail dot com” to “pranshi@gmail.com”. Also accepts “attherate”, “at”, dots, underscores, hyphens and plus signs. Works locally with regular dictation and Clean Dictation."
+      }
+    },
     "modelSettings": {
       "title": "{{model}} Settings"
     },
     "general": {
       "title": "General",
       "shortcut": {
-        "title": "Karen Voice Shortcuts",
+        "title": "Mumble Shortcuts",
         "description": "Configure keyboard shortcuts to trigger speech-to-text recording",
         "loading": "Loading shortcuts...",
         "none": "No shortcuts configured",
@@ -226,7 +248,7 @@
       },
       "rescan": {
         "label": "Rescan",
-        "tooltip": "Rescan for models added to the models folder or Hugging Face cache outside Karen Voice"
+        "tooltip": "Rescan for models added to the models folder or Hugging Face cache outside Mumble"
       },
       "noModelsMatch": "No models match this filter."
     },
@@ -294,11 +316,11 @@
       },
       "autostart": {
         "label": "Launch on Startup",
-        "description": "Automatically start Karen Voice when you log in to your computer."
+        "description": "Automatically start Mumble when you log in to your computer."
       },
       "showTrayIcon": {
         "label": "Show Tray Icon",
-        "description": "Display the Karen Voice icon in the system tray."
+        "description": "Display the Mumble icon in the system tray."
       },
       "overlay": {
         "style": {
@@ -412,7 +434,7 @@
     },
     "cleanDictation": {
       "enable": "Enable Clean Dictation",
-      "description": "Use a separate shortcut to remove fillers and fix punctuation. If cleanup fails, Karen Voice pastes the original transcript.",
+      "description": "Use a separate shortcut to remove fillers and fix punctuation. If cleanup fails, Mumble pastes the original transcript.",
       "provider": "Cleanup Provider",
       "providerNotice": "Choose a provider and model to clean up your text. If you choose a cloud provider, the cleanup shortcut sends your transcript to that provider.",
       "customInstructions": "Custom cleanup instructions",
@@ -511,7 +533,7 @@
       },
       "updateChecks": {
         "label": "Check for Updates",
-        "description": "Automatically check for new versions of Karen Voice",
+        "description": "Automatically check for new versions of Mumble",
         "lockedDescription": "Disabled by system configuration (HANDY_DISABLE_UPDATER)"
       },
       "whatsNewPreview": {
@@ -603,7 +625,7 @@
       },
       "keyboardDiagnostic": {
         "title": "Keyboard Diagnostic",
-        "description": "Checks whether keyboard events reach Karen Voice. Only event counts are recorded — never which keys you press.",
+        "description": "Checks whether keyboard events reach Mumble. Only event counts are recorded — never which keys you press.",
         "run": "Run 10s diagnostic",
         "running": "Listening… press your shortcut a few times (e.g. Option+Space)",
         "secureInputLabel": "Secure Input",
@@ -617,7 +639,7 @@
         "mouse": "Mouse",
         "verdictBlocked": "Secure Input is blocking key events — keyed shortcuts cannot work until it is resolved.",
         "verdictSuspicious": "Modifier events arrived but no key events — something is suppressing keys even though Secure Input reports disabled. Please report this on GitHub.",
-        "verdictOk": "Key events are reaching Karen Voice normally.",
+        "verdictOk": "Key events are reaching Mumble normally.",
         "verdictNoEvents": "No events captured — did you press any keys during the test?",
         "failed": "Diagnostic failed: {{error}}"
       }
@@ -626,15 +648,15 @@
       "title": "About",
       "version": {
         "title": "Version",
-        "description": "Current version of Karen Voice"
+        "description": "Current version of Mumble"
       },
       "whatsNewUpdates": {
         "label": "Show What's New",
-        "description": "Show release notes after Karen Voice updates"
+        "description": "Show release notes after Mumble updates"
       },
       "appDataDirectory": {
         "title": "App Data Directory",
-        "description": "Location where Karen Voice stores its data"
+        "description": "Location where Mumble stores its data"
       },
       "sourceCode": {
         "title": "Source Code",
@@ -643,7 +665,7 @@
       },
       "supportDevelopment": {
         "title": "Support Development",
-        "description": "Help us continue building Karen Voice",
+        "description": "Help us continue building Mumble",
         "button": "Donate"
       },
       "acknowledgments": {
@@ -651,7 +673,7 @@
         "ggml": {
           "title": "ggml",
           "description": "High-performance tensor library for on-device machine learning inference",
-          "details": "Karen Voice's local speech-to-text is built on transcribe.cpp and ggml. Thanks to the amazing work by Georgi Gerganov and contributors."
+          "details": "Mumble's local speech-to-text is built on transcribe.cpp and ggml. Thanks to the amazing work by Georgi Gerganov and contributors."
         }
       },
       "downloadReleases": "Downloads"
@@ -673,7 +695,7 @@
     "portableUpdateBrowseButton": "Open GitHub Releases"
   },
   "whatsNew": {
-    "title": "New in Karen Voice v{{version}}"
+    "title": "New in Mumble v{{version}}"
   },
   "common": {
     "loading": "Loading...",
@@ -685,7 +707,7 @@
     "noOptionsFound": "No options found"
   },
   "accessibility": {
-    "permissionsDescription": "Karen Voice needs accessibility permissions to type transcribed text.",
+    "permissionsDescription": "Mumble needs accessibility permissions to type transcribed text.",
     "openSettings": "Open System Settings"
   },
   "errors": {
@@ -708,11 +730,11 @@
   },
   "appLanguage": {
     "title": "Application Language",
-    "description": "Change the language of the Karen Voice interface"
+    "description": "Change the language of the Mumble interface"
   },
   "theme": {
     "title": "Application Theme",
-    "description": "Choose whether Karen Voice follows your system theme or stays light or dark",
+    "description": "Choose whether Mumble follows your system theme or stays light or dark",
     "options": {
       "system": "System",
       "light": "Light",
@@ -735,8 +757,8 @@
     "dismiss": "Dismiss"
   },
   "brand": {
-    "fullName": "Karen Voice",
-    "name": "Karen",
+    "fullName": "Mumble",
+    "name": "Mumble",
     "capability": "Voice"
   }
 }

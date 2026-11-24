@@ -19,3 +19,9 @@ src-tauri/src/catalog/catalog.json
 # Misc
 .DS_Store
 *.log
+
+# Third-party Windows SDK and generated verification output
+/VULKAN_SDK/
+/src-tauri/resources/licenses/onnxruntime/
+/release-assets/
+/windows-evidence/

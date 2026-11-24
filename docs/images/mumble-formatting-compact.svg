@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="540" height="650" viewBox="0 0 540 650" role="img" aria-labelledby="title desc">
+  <title id="title">English number and email formatting</title>
+  <desc id="desc">Twenty five becomes 25. Alex attherate example dot com becomes alex@example.com. Optional English settings. Explanatory illustration.</desc>
+  <rect width="540" height="650" rx="24" fill="#17241d"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="32" y="53" font-size="17" letter-spacing="2" fill="#8fe3b8">MUMBLE FORMATTING</text>
+    <text x="32" y="108" font-size="37" font-weight="700" fill="#f3f7f4">Say it. Type it in</text>
+    <text x="32" y="153" font-size="37" font-weight="700" fill="#f3f7f4">the right format.</text>
+    <text x="32" y="195" font-size="22" fill="#b7c8bd">Optional settings for English</text>
+    <rect x="32" y="228" width="476" height="151" rx="16" fill="#22352a" stroke="#3a5143"/>
+    <text x="53" y="265" font-size="17" fill="#b7c8bd">NUMBERS AS DIGITS</text>
+    <text x="53" y="307" font-size="26" fill="#f3f7f4">twenty five invitations</text>
+    <text x="53" y="352" font-size="28" font-weight="700" fill="#8fe3b8">→ 25 invitations</text>
+    <rect x="32" y="399" width="476" height="151" rx="16" fill="#22352a" stroke="#3a5143"/>
+    <text x="53" y="436" font-size="17" fill="#b7c8bd">SPOKEN EMAIL ADDRESSES</text>
+    <text x="53" y="478" font-size="24" fill="#f3f7f4">alex attherate example dot com</text>
+    <text x="53" y="523" font-size="28" font-weight="700" fill="#8fe3b8">→ alex@example.com</text>
+    <text x="32" y="597" font-size="21" fill="#b7c8bd">Enable in Settings → Formatting.</text>
+    <text x="32" y="632" font-size="16" fill="#8aa493">Formatting illustration · Reserved email example</text>
+  </g>
+</svg>

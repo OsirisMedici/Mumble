@@ -1,4 +1,4 @@
-/* Karen Voice colors. Accent values match T3 Code Grove. */
+/* Mumble colors. Accent values match T3 Code Grove. */
 
 :root {
   /* Palette source of truth. Each themed color is defined once as a
@@ -54,7 +54,7 @@
  * Explicit theme override, driven by the `theme` setting via
  * `document.documentElement.dataset.theme`. When set, the higher-specificity
  * attribute selectors win over the `prefers-color-scheme` media query above,
- * so a user can keep Karen Voice light or dark regardless of the OS setting.
+ * so a user can keep Mumble light or dark regardless of the OS setting.
  * `system` (or no attribute) leaves the OS in charge.
  *
  * Lives here (not in App.css) so every window that imports the shared palette —
