@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       source_revision:
-        description: Exact 40-character app source commit built by both runs
+        description: Exact release commit; application files must match both verified builds
         required: true
         type: string
       mac_run:

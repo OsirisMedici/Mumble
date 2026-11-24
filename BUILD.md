@@ -61,3 +61,7 @@ After replacing an ad-hoc signed preview, macOS can retain the previous build's 
 In GitHub Actions, run **Verify built-app transcription** and provide the successful Mac build run ID. This downloads the exact Apple Silicon app artifact, verifies its archive and signature, downloads a pinned public model with a SHA-256 check, and transcribes generated speech. The model stays on the disposable runner and is not included in the release.
 
 This checks the real speech engine. Microphone capture, Accessibility permissions and paste into another app remain separate user acceptance checks.
+
+## Publish verified artifacts
+
+`Publish verified preview` reuses successful native build runs rather than rebuilding to publish documentation. It verifies every asset hash and each report's exact build revision. All tracked application files must match the release source; only documentation, installer helpers and the named release-verification files may differ between the platform builds. The reports retain each exact source revision. A failed or incomplete run cannot be published. `Verify public installers` then installs the public downloads on clean Apple Silicon, Intel Mac and Windows x64 runners.
