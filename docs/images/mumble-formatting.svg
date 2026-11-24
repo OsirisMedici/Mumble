@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="590" viewBox="0 0 1120 590" role="img" aria-labelledby="title desc">
+  <title id="title">Turn spoken numbers and email addresses into typed text</title>
+  <desc id="desc">English formatting examples. Twenty five becomes 25. Alex attherate example dot com becomes alex@example.com. Both settings are optional. This is an explanatory illustration.</desc>
+  <rect width="1120" height="590" rx="28" fill="#17241d"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="48" y="72" font-size="18" letter-spacing="2" fill="#8fe3b8">MUMBLE FORMATTING</text>
+    <text x="48" y="130" font-size="42" font-weight="700" fill="#f3f7f4">Say it. Type it in the right format.</text>
+    <text x="48" y="172" font-size="24" fill="#b7c8bd">Optional settings for English dictation</text>
+    <rect x="48" y="210" width="1024" height="128" rx="18" fill="#22352a" stroke="#3a5143"/>
+    <text x="75" y="248" font-size="17" letter-spacing="1" fill="#b7c8bd">NUMBERS AS DIGITS</text>
+    <text x="75" y="298" font-size="30" fill="#f3f7f4">twenty five invitations</text>
+    <path d="M610 287h52m-11-9 11 9-11 9" fill="none" stroke="#66d5a1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="708" y="298" font-size="30" font-weight="700" fill="#8fe3b8">25 invitations</text>
+    <rect x="48" y="358" width="1024" height="128" rx="18" fill="#22352a" stroke="#3a5143"/>
+    <text x="75" y="396" font-size="17" letter-spacing="1" fill="#b7c8bd">SPOKEN EMAIL ADDRESSES</text>
+    <text x="75" y="444" font-size="27" fill="#f3f7f4">alex attherate example dot com</text>
+    <path d="M610 433h52m-11-9 11 9-11 9" fill="none" stroke="#66d5a1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="708" y="444" font-size="27" font-weight="700" fill="#8fe3b8">alex@example.com</text>
+    <text x="48" y="533" font-size="21" fill="#b7c8bd">Enable either option in Settings → Formatting. Preview the result there.</text>
+    <text x="48" y="565" font-size="16" fill="#8aa493">Formatting illustration · Examples use a reserved email domain</text>
+  </g>
+</svg>

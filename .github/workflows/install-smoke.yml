@@ -1,0 +1,34 @@
+name: Verify public installers
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  install:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, macos-15-intel, windows-2022]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install and verify Mac release
+        if: runner.os == 'macOS'
+        shell: bash
+        run: |
+          bash scripts/install/macos.sh --destination "$RUNNER_TEMP/Installed Mumble"
+          APP="$RUNNER_TEMP/Installed Mumble/Mumble.app"
+          codesign --verify --deep --strict "$APP"
+          "$APP/Contents/MacOS/karen-voice" --list-devices
+      - name: Install and verify Windows release
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          ./scripts/install/windows.ps1 -Destination "$env:RUNNER_TEMP/Installed Mumble"
+          $exe = "$env:RUNNER_TEMP/Installed Mumble/karen-voice.exe"
+          if ((Get-Item $exe).VersionInfo.ProductName -ne 'Mumble') { throw 'Wrong product' }
+          & $exe --list-devices
+          if ($LASTEXITCODE -ne 0) { throw 'Installed engine failed startup' }
