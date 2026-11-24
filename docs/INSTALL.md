@@ -21,7 +21,7 @@ cat /tmp/mumble-install.sh
 bash /tmp/mumble-install.sh
 ```
 
-The default destination is `~/Applications/Mumble.app`. No sudo is needed. A previous app at that location is preserved as a timestamped backup. User settings and models stay in their existing data directory.
+The default destination is `~/Applications/Mumble.app`. No sudo is needed. The installer refuses downgrades and leaves an identical installed preview unchanged. When replacing an older build, it preserves a timestamped backup and restores it if activation fails. User settings and models stay in their existing data directory.
 
 To check the download without installing, use `bash /tmp/mumble-install.sh --verify-only`. For another directory, use `--destination /path/to/Applications`.
 
