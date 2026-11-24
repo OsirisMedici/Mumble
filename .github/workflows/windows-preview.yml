@@ -1,0 +1,79 @@
+name: Windows preview
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/windows-preview.yml
+      - .github/workflows/release.yml
+      - scripts/ci/**
+      - scripts/verify-built-transcription.py
+      - src-tauri/**
+      - src/**
+      - public/**
+      - package.json
+      - bun.lock
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-2022
+    timeout-minutes: 90
+    env:
+      CMAKE_POLICY_VERSION_MINIMUM: "3.5"
+      CARGO_BUILD_JOBS: "3"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri -> target
+          key: windows-x64-v1
+      - name: Install Vulkan build tools
+        uses: humbletim/install-vulkan-sdk@30ba978f977e81b72d091fc8888feb1fb26f9aff # v1.2
+        with:
+          version: 1.4.309.0
+          cache: true
+      - name: Prepare Windows native dependencies
+        shell: pwsh
+        run: ./scripts/ci/setup-windows.ps1
+      - run: bun install --frozen-lockfile
+      - run: bun run lint
+      - run: bunx prettier --check .
+      - run: bun run test:keyboard
+      - run: bun run test:settings
+      - run: bun run build
+      - name: Rust formatting
+        run: cargo fmt --manifest-path src-tauri/Cargo.toml -- --check
+      - name: Rust lint
+        run: cargo clippy --locked --release --manifest-path src-tauri/Cargo.toml --target x86_64-pc-windows-msvc
+      - name: Build Windows setup executable
+        run: bun run tauri build --target x86_64-pc-windows-msvc --bundles nsis -- --locked
+      - name: Test native formatting on Windows
+        shell: pwsh
+        run: |
+          $env:PATH = "$PWD/src-tauri/transcribe-libs;$env:PATH"
+          cargo test --locked --release --manifest-path src-tauri/Cargo.toml --target x86_64-pc-windows-msvc --lib formatting
+          if ($LASTEXITCODE -ne 0) { throw 'Windows formatting tests failed' }
+      - name: Install and verify the packaged app
+        shell: pwsh
+        run: ./scripts/ci/verify-windows.ps1
+      - name: Upload Windows downloads
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-x86_64-pc-windows-msvc
+          path: release-assets/
+          if-no-files-found: error
+      - name: Save Windows verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-verification
+          path: windows-evidence/
+          if-no-files-found: ignore

@@ -143,7 +143,17 @@ fn stage_onnxruntime_dll() {
     std::fs::create_dir_all(&dest_dir).expect("create transcribe-libs staging dir");
     std::fs::copy(&src, dest_dir.join("onnxruntime.dll"))
         .unwrap_or_else(|e| panic!("copy {}: {e}", src.display()));
-    println!("cargo:warning=Staged onnxruntime.dll for Windows bundling");
+    // The official CPU distribution also carries this provider-support DLL.
+    // Bundle it when supplied instead of relying on a build-machine copy.
+    let providers = PathBuf::from(&lib_location).join("onnxruntime_providers_shared.dll");
+    if providers.exists() {
+        std::fs::copy(
+            &providers,
+            dest_dir.join("onnxruntime_providers_shared.dll"),
+        )
+        .unwrap_or_else(|e| panic!("copy {}: {e}", providers.display()));
+    }
+    println!("cargo:warning=Staged ONNX Runtime DLLs for Windows bundling");
 }
 
 /// Stage transcribe-cpp's shared runtime libraries into `transcribe-libs/` so the

@@ -2,11 +2,11 @@
 
 ## Outcome
 
-People can download a free Mac dictation app, choose a local speech model, set a shortcut and put spoken words into the app they are using. The recognizable product name is Mumble, with green accents matching T3 Code's Grove palette.
+People can download a free Mac or Windows x64 dictation app, choose a local speech model, set a shortcut and put spoken words into the app they are using. The recognizable product name is Mumble, with green accents matching T3 Code's Grove palette.
 
 ## Included
 
-Existing recording, speech recognition, paste, history, settings and overlay behavior. Separate bundle and data identity, original waveform branding, public source, Mac downloads, reproducible CI, release checksums and required legal notices.
+Existing recording, speech recognition, paste, history, settings and overlay behavior. Separate bundle and data identity, original waveform branding, public source, Mac and Windows x64 downloads, reproducible CI, release checksums and required legal notices.
 
 ## Number formatting
 
@@ -18,7 +18,7 @@ Formatting also has an opt-in **Spoken email addresses** setting for English dic
 
 ## Deferred
 
-Assistant chat, task execution, wake words, cloud accounts, automatic migration of another app's data, signed auto-updates, Apple notarization and published Windows/Linux installers. The local speech model pipeline and model download services are retained from the baseline.
+Assistant chat, task execution, wake words, cloud accounts, automatic migration of another app's data, signed auto-updates, Apple notarization and Windows ARM64 and published Linux installers. The local speech model pipeline and model download services are retained from the baseline.
 
 ## Acceptance
 

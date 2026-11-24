@@ -4,7 +4,7 @@ Free, open-source dictation that runs on your computer. Press a shortcut, speak,
 
 [Download the Mac preview](https://github.com/OsirisMedici/karen-voice/releases) · [Report a problem](https://github.com/OsirisMedici/karen-voice/issues)
 
-## Download and start
+## Download and start on Mac
 
 1. Download the Apple Silicon DMG for an M-series Mac, or the Intel DMG for an Intel Mac. macOS 13 or newer is required.
 2. Open the DMG and drag **Mumble** into Applications.
@@ -14,6 +14,12 @@ Free, open-source dictation that runs on your computer. Press a shortcut, speak,
 6. Set your shortcut, put the cursor in a text field, speak, and stop recording. The transcription appears there.
 
 Quit other dictation apps while using the same shortcut. Mumble has its own settings and model directory, so another app's setup is not migrated automatically.
+
+## Windows preview
+
+Windows x64 builds target 64-bit Intel/AMD PCs. The **Windows preview** GitHub Actions workflow builds an NSIS setup executable and a portable ZIP, installs both on Windows, checks the packaged runtime files and transcribes generated speech using the installed app. Download the `windows-x86_64-pc-windows-msvc` artifact from a successful run. Tagged desktop releases include the same Windows files alongside Mac downloads.
+
+Run the `windows_x64-setup.exe` installer, open Mumble, enable desktop microphone access in Windows Settings if needed, download a speech model, and choose a shortcut. Apple Intelligence is available only on supported Macs; local dictation and the Formatting options are shared. These Windows previews are unsigned. Windows ARM64 is not included yet. See [Windows setup and acceptance](docs/WINDOWS.md).
 
 ## What is included
 
@@ -42,7 +48,7 @@ If typing or shortcuts stop working, check microphone and Accessibility permissi
 
 ## Build and contribute
 
-See [BUILD.md](BUILD.md) and [CONTRIBUTING.md](CONTRIBUTING.md). Current release automation builds macOS. Windows and Linux source is retained, but their Mumble installers are not published or verified yet.
+See [BUILD.md](BUILD.md) and [CONTRIBUTING.md](CONTRIBUTING.md). Release automation builds macOS and Windows x64 previews. Linux source is retained, but Linux installers are not published or verified yet.
 
 ## License
 
